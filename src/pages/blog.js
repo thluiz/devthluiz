@@ -2,34 +2,9 @@ import React from "react"
 import Card from "../components/Card"
 import Page from "../components/PageLayout"
 import Helmet from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
-const Blog = () => {
-  const data = useStaticQuery(graphql`
-    {
-      allMarkdownRemark(
-        sort: { fields: frontmatter___date, order: DESC }
-        limit: 4
-      ) {
-        edges {
-          node {
-            frontmatter {
-              title
-              slug
-              date(formatString: "MMMM DD, YYYY")
-              author
-              description
-            }
-          }
-        }
-      }
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+const Blog = ({ data }) => {
   return (
     <Page>
       <Helmet>
@@ -51,5 +26,31 @@ const Blog = () => {
     </Page>
   )
 }
+
+export const query = graphql`
+  query BlogPostsList($locale: String = "pt") {
+    allMarkdownRemark(
+      filter: { frontmatter: { language: { eq: $locale } } }
+      sort: { fields: frontmatter___date, order: DESC }
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            slug
+            date(formatString: "MMMM DD, YYYY")
+            author
+            description
+          }
+        }
+      }
+    }
+    site {
+      siteMetadata {
+        title
+      }
+    }
+  }
+`
 
 export default Blog

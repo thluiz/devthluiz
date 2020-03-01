@@ -1,9 +1,10 @@
 ---
-slug: "/blog/create-blog-lessthan-5mins"
+slug: "/en/blog/create-blog-lessthan-5mins"
 date: "2019-07-12"
 title: "How to create Blog in less than 5 Minutes"
 author: "Mohan"
 tags: ["gatsby" , "blog"]
+language: "en"
 description: "In this post, you will see how to create an awesome blog in less than 5 minutes"
 authorImg: "https://avatars3.githubusercontent.com/u/21126965?s=460&v=4"
 ---
