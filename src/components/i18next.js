@@ -6,8 +6,8 @@ const locales = require("../../locale/config")
 const detectorOptions = {
   // order and from where user language should be detected
   order: [
-    "WindowLocationDetector",
     "localStorage",    
+    "WindowLocationDetector",
     "querystring",
     "cookie",
   ],
@@ -20,16 +20,12 @@ const detectorOptions = {
   lookupFromSubdomainIndex: 0,
 
   // cache user language on
-  caches: ["localStorage", "cookie"],
-  caches: [],
+  caches: ["localStorage", "cookie"],  
   excludeCacheFor: ["cimode"], // languages to not persist (cookie, localStorage)
 
   // optional expire and domain for set cookie
   cookieMinutes: 10,
   cookieDomain: "dev.thluiz.com",
-
-  // optional htmlTag with lang attribute, the default is:
-  htmlTag: document.documentElement,
 
   // only detect languages that are in the whitelist
   checkWhitelist: true,
@@ -40,7 +36,7 @@ languageDetector.addDetector({
   name: "WindowLocationDetector",
 
   lookup() {
-      if(window.location.pathname.length > 2) {
+      if(typeof window !== `undefined` && window.location.pathname.length > 2) {
         var lang = window.location.pathname.substr(1, 2);              
         if(locales[lang]) {
             return lang;
