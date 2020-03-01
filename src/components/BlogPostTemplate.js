@@ -9,8 +9,6 @@ import { DiscussionEmbed } from 'disqus-react'
 
 const Temp = ({ data, pageContext }) => {
 
-  console.log(pageContext)
-
   const { theme, toggleTheme } = useTheme();
 
   const { markdownRemark } = data // data.markdownRemark holds our post data
@@ -46,11 +44,14 @@ const Temp = ({ data, pageContext }) => {
             to="/"
             cover
             direction="right"
-            bg="#00BCD4"
+            bg="var(--primary-color)"
+            class="primary-color"
           >
-            <img src="https://img.icons8.com/material-rounded/48/00bcd4/back.png" width="48" alt="back-icon" />
+            <button className="btn btn-info">
+                &lt;
+            </button>            
           </AniLink>
-          <span className="display-4 font-weight-bold">
+          <span className="display-4 font-weight-bold primary-color">
             {frontmatter.title}
           </span>
           <span className="font-weight-bold text-muted">

@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 const TagList = ({ tags }) => {
     return (
         <div className = "my-4">
-            <h4>Tags</h4>
+            <h4 class="primary-color">Tags</h4>
             <div>
                 {
                     tags.map(

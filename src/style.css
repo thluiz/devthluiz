@@ -3,8 +3,24 @@
     --card-color: #FFF;
     --card-text-color: #000;
     --bg-color: white;
-    --cyan-color:black;
-    --block-quote-bg : #F9F9F9
+    --block-quote-bg : #F9F9F9;
+    --teste: #663399;
+
+    /* Palette URL: http://paletton.com/#uid=23E050kiCFn8GVde7NVmtwSqXtg */
+    /* Monochromatic Colors */
+    --primary-color: #5C88C4;
+    --primary-color-1: #B4CDEF;    
+    --primary-color-2: #83A8DB;    
+    --primary-color-3: #3D6BAA;    
+    --primary-color-4: #235599;    
+
+    /* Monochromatic Complement Colors */
+    --complement-color: #FFC76B;        
+    --complement-color-1: #FFE5BA;        
+    --complement-color-2: #FFD58F;        
+    --complement-color-3: #FFBC4C;        
+    --complement-color-4: #E99F25;        
+
 }
 
 html body {
@@ -13,10 +29,22 @@ html body {
     background-color: var(--bg-color) !important;
 }
 
+.bg-primary-color {
+    background-color: var(--primary-color);
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.primary-color-1 {
+    color: var(--primary-color-1);
+}
+
 .theme-toggle-button {
     border: none;
     text-align: center;
-    background-color: var(--cyan-color) !important;
+    background-color: var(--primary-color) !important;
     z-index: 3;
     display: block;
     float: right;
@@ -69,7 +97,7 @@ html body {
 }
 
 .author-img {
-    border: 2px solid var(--cyan-color) !important;
+    border: 2px solid var(--primary-color) !important;
 }
 
 .post {
@@ -110,7 +138,7 @@ blockquote {
     padding: 15px;
     font-weight: 100;
     font-style: italic;
-    border-left: .5em solid var(--cyan-color);
+    border-left: .5em solid var(--primary-color);
     background-color: var(--block-quote-bg)
 }
 
@@ -136,4 +164,42 @@ blockquote {
         z-index: auto;
         overflow-x: visible;
     }
+}
+
+
+/* BOOTSTRAP */
+
+h2 {
+    color: var(--primary-color);
+}
+
+.text-info {
+    color: var(--primary-color) !important;
+}
+
+.btn-info {
+    background-color: var(--primary-color);    
+}
+
+.btn-info {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-info:hover {
+    color: #fff;
+    background-color: var(--complement-color);
+    border-color: var(--complement-color);
+  }
+  
+  .btn-info:focus, .btn-info.focus {
+    box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+  }
+
+  .btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active,
+.show > .btn-info.dropdown-toggle {
+  color: #fff;
+  background-color: var(--complement-color-4);
+  border-color: var(--complement-color-4);
 }

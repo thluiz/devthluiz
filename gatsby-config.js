@@ -1,16 +1,30 @@
+const Config = {
+  title: 'Arquivos de Desenvolvimento',
+  short_name: 'Desenvolvimento',
+  description: 'Notas e fragmentos sobre desenvolvimento de softwares',
+  author: `@thluiz`,
+  githubUrl: 'https://github.com/thluiz/devthluiz',
+  theme_color: '#5C88C4',
+  secondary_color: '#FFC76B',
+  background_color: '#5C88C4'
+}
+
 module.exports = {
   siteMetadata: {
-    title: `Arquivos do Desenvolvimento`,
-    description: `Notas e fragmentos sobre desenvolvimento de software`,
-    author: `@thluiz`,
-    githubUrl: "https://github.com/thluiz/devthluiz"
+    title: Config.title,
+    description: Config.description,
+    author: Config.author,
+    githubUrl: Config.githubUrl,
+    theme_color: Config.theme_color,
+    background_color: Config.background_color,
+    secondary_color: Config.secondary_color,     
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `Desenvolvimento por ThLuiz`
+        shortname: Config.short_name
       }
     },
     {
@@ -33,11 +47,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Arquivos do Desenvolvimento`,
-        short_name: `devthluiz`,
+        name: Config.title,
+        short_name: Config.short_name,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#00BCD4`,
+        background_color: Config.background_color,
+        theme_color: Config.theme_color,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },

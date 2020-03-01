@@ -4,12 +4,9 @@ import AniLink from "gatsby-plugin-transition-link/AniLink";
 const titleStyle = {
     fontWeight: "700",
 }
-const authorLinkStyle = {
-    color: "#00BCD4"
-}
 
 const Author = ({ children, to }) => (
-    <AniLink style={authorLinkStyle} to={to} className="font-weight-bold" fade>
+    <AniLink to={to} className="primary-color" fade>
         {children}
     </AniLink>
 )
@@ -24,12 +21,11 @@ const Card = ({ title, description, timeStamp, authorName, slug }) => {
             style={cardLinkStyle}
             to={slug}
             cover
-            bg="#00BCD4"
-
+            bg="var(--primary-color)"
         >
             <div class="card my-4">
                 <div class="card-body">
-                    <h5 class="card-title" style={titleStyle}>{title}</h5>
+                    <h5 class="card-title primary-color" style={titleStyle}>{title}</h5>
                     <p class="card-text">{description}</p>
                     <h6 class="card-subtitle text-muted">
                         <Author to="/about">{authorName}</Author> on {timeStamp}

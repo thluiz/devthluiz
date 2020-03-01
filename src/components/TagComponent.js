@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from './Card'
-import AniLink from "gatsby-plugin-transition-link/AniLink";
+import BackButton from './BackButton'
 import { graphql } from 'gatsby';
 import '../style.css'
 
@@ -11,15 +11,9 @@ const TagComponent = ({ pageContext, data }) => {
     return (
 
         <div className="container">
-            <AniLink
-                to="/tags"
-                fade
-                duration={.5}
-            >
-                <img src="https://img.icons8.com/material-rounded/48/00bcd4/back.png" width="48" alt="back-icon" className="mb-4" />
-            </AniLink>
+            <BackButton to="/tags" />
 
-            <h1>#{tag}</h1>
+            <h1 class="primary-color">#{tag}</h1>
             <div className="col">
                 {
                     data.allMarkdownRemark.edges.map(

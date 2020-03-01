@@ -38,7 +38,7 @@ const Intro = ({ data }) =>(
                     src="https://img.icons8.com/office/40/000000/markdown.png"
                     alt="build-with-icon-4" />
             </a>
-            <h6><br />Open Sourced on <a href={data.site.siteMetadata.githubUrl || 'https://github.com'}>Github</a></h6>
+            <h6><br />Open Sourced on <a class="primary-color" href={data.site.siteMetadata.githubUrl || 'https://github.com'}>Github</a></h6>
             {/* <hr />
             <h4>Latest Posts</h4>
             <ul class="list-group my-3">

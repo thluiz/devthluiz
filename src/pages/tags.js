@@ -6,7 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 
 
 const Tags = () => {
-    const { allMarkdownRemark } = useStaticQuery(
+    const result = useStaticQuery(
         graphql`
         {
             allMarkdownRemark {
@@ -18,11 +18,19 @@ const Tags = () => {
                 }
               }
             }
+            site {
+                siteMetadata {
+                  title
+                }
+            }
           }
-          
         `
     )
 
+    const allMarkdownRemark = result.allMarkdownRemark;
+    const site = result.site;
+
+    const siteMetadata = site.siteMetadata;
     const posts = allMarkdownRemark.edges
 
     let TagArray = []
@@ -44,15 +52,16 @@ const Tags = () => {
     return (
         <Page>
             <Helmet>
-                <title>Tags | The 404 Blog</title>
+                <title>Tags | { siteMetadata.title }</title>
             </Helmet>
             <div className="container">
-                <h1>Tags</h1>
+                <h1 class="primary-color">Tags</h1>
                 {
                     Array.from(new Set(TagArray)).map(
                         (tagItem, index) => {
                             return <Link
-                                fade
+                                cover
+                                bg="var(--primary-color)"
                                 duration = {.5}
                                 to={"/tags/" + tagItem}
                                 className="btn mr-4 btn-info my-3">
