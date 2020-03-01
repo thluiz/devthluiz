@@ -1,14 +1,10 @@
 import i18next from "i18next"
 import LanguageDetector from "i18next-browser-languagedetector"
-import getDefaultLanguage from "../getDefaultLanguage";
-const locales = require("../../locale/config")
 
 const detectorOptions = {
   // order and from where user language should be detected
   order: [
-    "localStorage",    
-    "WindowLocationDetector",
-    "querystring",
+    "localStorage",     
     "cookie",
   ],
 
@@ -31,29 +27,7 @@ const detectorOptions = {
   checkWhitelist: true,
 }
 
-const languageDetector = new LanguageDetector()
-languageDetector.addDetector({
-  name: "WindowLocationDetector",
-
-  lookup() {
-      if(typeof window !== `undefined` && window.location.pathname.length > 2) {
-        var lang = window.location.pathname.substr(1, 2);              
-        if(locales[lang]) {
-            return lang;
-        }
-      }    
-          
-    return getDefaultLanguage();
-  },
-
-  cacheUserLanguage(lng, options) {
-    // options -> are passed in options
-    // lng -> current language, will be called after init and on changeLanguage
-    // store it
-  },
-})
-
-i18next.use(languageDetector).init({
+i18next.use(LanguageDetector).init({
   detection: detectorOptions,
   lang: "pt",
   fallbackLng: "pt",
