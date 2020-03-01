@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `The 404 Blog`,
-    description: `Crafted for developers , hoping they can learn something valuable out of it.`,
-    author: `@MrNullPointer`,
+    title: `Arquivos do Desenvolvedor`,
+    description: `Notas gerais sobre desenvolvimento de software`,
+    author: `@thluiz`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
