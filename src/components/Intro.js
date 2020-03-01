@@ -1,13 +1,13 @@
 import React from 'react'
+import { StaticQuery, graphql } from "gatsby"
 
 import { Link } from 'gatsby';
 
-function Intro() {
-
-    return (
+const Intro = ({ data }) =>(
+    <intro>
         <div className="container my-4">
-            <h2 className="card-title text-info font-weight-bold">The 404 Blog</h2>
-            <p className="card-subtitle mt-2">Crafted for developers , hoping they can learn something valuable out of it.</p>
+            <h2 className="card-title text-info font-weight-bold">{data.site.siteMetadata.title}</h2>
+            <p className="card-subtitle mt-2">{data.site.siteMetadata.description}</p>
             <Link className="btn btn-info my-3" to="about">Know More</Link>
 
             <hr />
@@ -38,7 +38,7 @@ function Intro() {
                     src="https://img.icons8.com/office/40/000000/markdown.png"
                     alt="build-with-icon-4" />
             </a>
-            <h6><br />Open Sourced on <a href="https://github.com">Github</a></h6>
+            <h6><br />Open Sourced on <a href={data.site.siteMetadata.githubUrl || 'https://github.com'}>Github</a></h6>
             {/* <hr />
             <h4>Latest Posts</h4>
             <ul class="list-group my-3">
@@ -49,7 +49,21 @@ function Intro() {
                 <li class="list-group-item">Vestibulum at eros</li>
             </ul> */}
         </div>
-    )
-}
+    </intro>
+)
 
-export default Intro
+
+export default props => (
+    <StaticQuery
+      query={graphql`
+        query {
+          site {
+            siteMetadata {
+              title, description, author, githubUrl
+            }
+          }
+        }
+      `}
+      render={data => <Intro data={data} {...props} />}
+    />
+  )

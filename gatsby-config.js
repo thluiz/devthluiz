@@ -1,15 +1,16 @@
 module.exports = {
   siteMetadata: {
-    title: `Arquivos do Desenvolvedor`,
-    description: `Notas gerais sobre desenvolvimento de software`,
+    title: `Arquivos do Desenvolvimento`,
+    description: `Notas e fragmentos sobre desenvolvimento de software`,
     author: `@thluiz`,
+    githubUrl: "https://github.com/thluiz/devthluiz"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
-        shortname: `the404blog`
+        shortname: `Desenvolvimento por ThLuiz`
       }
     },
     {
@@ -32,8 +33,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `The404Blog`,
-        short_name: `404Blog`,
+        name: `Arquivos do Desenvolvimento`,
+        short_name: `devthluiz`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#00BCD4`,
