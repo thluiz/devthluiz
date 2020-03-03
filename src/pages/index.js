@@ -45,9 +45,9 @@ function index({ data, pageContext }) {
 }
 
 export const query = graphql`
-  query index($locale: String = "pt") {
+  query index($language: String = "pt") {
     allMarkdownRemark(
-      filter: { frontmatter: { language: { eq: $locale } } }
+      filter: { frontmatter: { language: { eq: $language } } }
       sort: { fields: frontmatter___date, order: DESC }
       limit: 4
     ) {

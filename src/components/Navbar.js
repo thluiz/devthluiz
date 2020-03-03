@@ -1,47 +1,11 @@
-import React, { useState } from "react"
-import { useTranslation } from "react-i18next"
+import React from "react"
 
-import Link from "gatsby-plugin-transition-link/AniLink"
+import { Translate } from "./withI18n"
 
-import ptLogo from "../images/pt.png"
-import enLogo from "../images/en.png"
-
-const NavLink = ({ children, to }) => (
-  <Link
-    to={to}
-    class="primary-color-1"
-    style={{
-      fontSize: "24px",
-      fontWeight: "600",
-    }}
-    fade
-    duration={1}
-  >
-    {children}
-  </Link>
-)
+import Link from "./LocalizedLink"
+import LanguageMenu from "./LanguageMenu"
 
 const NavBar = ({ ...props }) => {
-  const { t, i18n } = useTranslation()
-
-  const [_, setValues] = useState({
-    language: "pt",
-  })
-
-  const width = {
-    width: "50px",
-  }
-
-  function handleChange(lang, event) {
-    i18n.changeLanguage(lang)
-
-    setValues(oldValues => ({
-      ...oldValues,
-      ["language"]: lang,
-    }))
-    window.location.href = `/${lang}`
-  }
-
   return (
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-primary-color">
       <button
@@ -59,51 +23,37 @@ const NavBar = ({ ...props }) => {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav justify-content-center container">
           <li class="nav-item mr-5">
-            <NavLink class="nav-link" to={props.language + "/"}>
+            <Link { ...props } class="nav-link" to="/">
               Home
-            </NavLink>
+            </Link>
           </li>
           <li class="nav-item mr-5">
-            <NavLink class="nav-link" to={props.language + "/blog"}>
+            <Link { ...props } class="nav-link" to="/blog">
               Blog
-            </NavLink>
+            </Link>
           </li>
           <li class="nav-item mr-5">
-            <NavLink class="nav-link" to={props.language + "/tags"}>
+            <Link { ...props } class="nav-link" to="/tags">
               Tags
-            </NavLink>
+            </Link>
           </li>
-          {props.language != "en" && (
-            <li class="nav-item mr-5">
-              <img
-                src={enLogo}
-                alt="EN"
-                onClick={e => handleChange("en", e)}
-                style={width}
-              />
-            </li>
-          )}
-          {props.language != "pt" && (
-            <li class="nav-item mr-5">
-              <img
-                src={ptLogo}
-                alt="PT"
-                onClick={e => handleChange("pt", e)}
-                style={width}
-              />
-            </li>
-          )}
-          {/* 
-        <li class="nav-item mr-5">
-          <NavLink class="nav-link" to="/search">
-            Search
-          </NavLink>
-        </li>
-        */}
+          <LanguageMenu {...props}></LanguageMenu>
         </ul>
       </div>
     </nav>
   )
 }
 
-export default NavBar
+export default Translate(NavBar)
+
+/*
+const Search = () => {
+  return (
+    <li class="nav-item mr-5">
+      <Link class="nav-link" to="/search">
+        Search
+      </Link>
+    </li>
+  )
+}
+*/

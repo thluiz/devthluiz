@@ -1,17 +1,21 @@
 import React from "react"
 import Card from "./Card"
-import BackButton from "./BackButton"
 import { graphql } from "gatsby"
+
 import "../style.css"
 
-const TagComponent = ({ pageContext, data }) => {
+import BackButton from "./BackButton"
+import { Translate } from "./withI18n"
+
+const TagComponent = ({ pageContext, data, i18n }) => {
   const tag = pageContext.tag
+  const language = pageContext.lng
 
   return (
     <div className="container">
-      <BackButton to="/tags" />
+      <BackButton to="/tags" language={language} />
 
-      <h1 class="primary-color">#{tag}</h1>
+      <h1 class="primary-color"> #{tag}</h1>
       <div className="col">
         {data.allMarkdownRemark.edges.map(({ node }, index) => {
           return (
@@ -30,7 +34,7 @@ const TagComponent = ({ pageContext, data }) => {
   )
 }
 
-export default TagComponent
+export default Translate(TagComponent)
 
 export const query = graphql`
   query($tag: String) {

@@ -9,8 +9,8 @@ const languages = Object.keys(locales).map(function (key) { return locales[key];
 const default_language = languages.find(l => l.default).path;
 
 export const query = graphql`
-  query TagsPostsList($locale: String) {
-    allMarkdownRemark(filter: { frontmatter: { language: { eq: $locale } } }) {
+  query TagsPostsList($language: String) {
+    allMarkdownRemark(filter: { frontmatter: { language: { eq: $language } } }) {
       edges {
         node {
           frontmatter {
@@ -60,7 +60,7 @@ const Tags = ({ data, pageContext }) => {
               cover
               bg="var(--primary-color)"
               duration={0.5}
-              to={`/${pageContext.locale || default_language}/tags/` + tagItem}
+              to={`/${pageContext.language || default_language}/tags/` + tagItem}
               className="btn mr-4 btn-info my-3"
             >
               #{tagItem}

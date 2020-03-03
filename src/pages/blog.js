@@ -28,9 +28,9 @@ const Blog = ({ data }) => {
 }
 
 export const query = graphql`
-  query BlogPostsList($locale: String = "pt") {
+  query BlogPostsList($language: String = "pt") {
     allMarkdownRemark(
-      filter: { frontmatter: { language: { eq: $locale } } }
+      filter: { frontmatter: { language: { eq: $language } } }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       edges {

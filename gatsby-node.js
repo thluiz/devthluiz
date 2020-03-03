@@ -1,8 +1,9 @@
 const path = require(`path`)
 const locales = require("./locale/config")
-const languages = Object.keys(locales).map(function (key) { return locales[key]; });
-const default_language = languages.find(l => l.default).path;
-
+const languages = Object.keys(locales).map(function(key) {
+  return locales[key]
+})
+const default_language = languages.find(l => l.default).path
 
 /* 
   Author : Mohan
@@ -38,7 +39,7 @@ exports.onCreatePage = ({ page, actions }) => {
         ...page,
         path: localizedPath,
         context: {
-          locale: lang,
+          language: lang,
         },
       })
     })
@@ -56,7 +57,9 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
       {
-        allMarkdownRemark {
+        allMarkdownRemark (
+          sort: {fields: frontmatter___language}
+        ) {
           edges {
             next {
               frontmatter {
@@ -74,6 +77,7 @@ exports.createPages = ({ graphql, actions }) => {
               frontmatter {
                 slug
                 tags
+                language
               }
             }
           }
@@ -104,21 +108,26 @@ exports.createPages = ({ graphql, actions }) => {
       })
     })
 
-    var languageGroup = groupBy(posts, post => post.language)
+    var languageGroup = groupBy(posts, post => post.node.frontmatter.language)
 
     languageGroup.forEach((posts_for_language, language) => {
-      let tagsGroup = groupBy(posts_for_language, post => post.tags)
-
-      tagsGroup.forEach((_, tag) =>
-        createPage({
-          path: `/${language}/tags/` + tag,
-          component: tagComponent,
-          context: {
-            locale: language,
-            tag,
-          },
-        })
+      let tagsGroup = groupBy(
+        posts_for_language,
+        post => post.node.frontmatter.tags
       )
+
+      tagsGroup.forEach((_, tags) => {
+        tags.forEach(tag => {          
+          createPage({
+            path: `/${language}/tags/` + tag,
+            component: tagComponent,
+            context: {
+              language,
+              tag,
+            },
+          })
+        })
+      })
     })
 
     return null
