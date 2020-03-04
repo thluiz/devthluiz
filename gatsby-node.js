@@ -1,9 +1,7 @@
+const config = require('./config');
 const path = require(`path`)
 const locales = require("./locale/config")
-const languages = Object.keys(locales).map(function(key) {
-  return locales[key]
-})
-const default_language = languages.find(l => l.default).path
+
 
 /* 
   Author : Mohan
@@ -103,7 +101,7 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           slug: post.node.frontmatter.slug,
           previous,
-          next,
+          next
         },
       })
     })

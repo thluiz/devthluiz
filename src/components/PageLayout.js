@@ -1,7 +1,7 @@
 import React from "react"
 import Navbar from "../components/Navbar"
+import Footer from "../components/Footer"
 
-import "../style.css"
 import useTheme from "../useTheme"
 
 import { Translate } from "./withI18n"
@@ -33,27 +33,15 @@ function PageLayout({ children, t, i18n, ...props }) {
     }
   }
 
-  return (    
-      <div className={theme}>
-        <Navbar language={language} />
-        <button className="btn theme-toggle-button" onClick={toggleTheme}>
-          {getTheme()}
-        </button>
-        <main>{children}</main>
-        <footer className={"text-center pt-4 " + theme}>
-          <h5>
-            {t("home.footerText")}{" "}
-            <a
-              className="font-weight-bold text-info"
-              href="https://www.github.com/mohanmonu777"
-            >
-              Mohan
-            </a>
-          </h5>
-          <h6>Copyright © The 404 Blog | 2019</h6>
-          <br />
-        </footer>
-      </div>
+  return (
+    <div className={theme}>
+      <Navbar language={language} />
+      <button className="btn theme-toggle-button" onClick={toggleTheme}>
+        {getTheme()}
+      </button>
+      <main>{children}</main>
+      <Footer />
+    </div>
   )
 }
 

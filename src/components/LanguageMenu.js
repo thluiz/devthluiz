@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { useTranslation } from "react-i18next"
 
 import ptLogo from "../images/pt.png"
@@ -7,17 +7,7 @@ import enLogo from "../images/en.png"
 const LanguageMenu = props => {
   const { i18n } = useTranslation()
 
-  const [_, setValues] = useState({
-    language: "pt",
-  })
-
-  function handleChange(lang) {
-    i18n.changeLanguage(lang)
-
-    setValues(oldValues => ({
-      ...oldValues,
-      ["language"]: lang,
-    }))
+  function handleChange(lang) {    
     window.location.href = `/${lang}`
   }
 

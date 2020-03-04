@@ -1,14 +1,17 @@
 import React from "react"
 import Card from "../components/Card"
 import Page from "../components/PageLayout"
+import { Translate } from "../components/withI18n"
 import Helmet from "react-helmet"
 import { graphql } from "gatsby"
 
-const Blog = ({ data }) => {
+const Blog = ({ t, data }) => {
   return (
     <Page>
       <Helmet>
-        <title>{data.site.siteMetadata.title}</title>
+        <title>          
+          {t("pages.blog.title")} | {t("site.title")}
+        </title>
       </Helmet>
       <div className="container">
         <div className="col">
@@ -16,9 +19,11 @@ const Blog = ({ data }) => {
             <Card
               slug={node.frontmatter.slug}
               authorName={node.frontmatter.author}
+              authorUrl={node.frontmatter.authorUrl}
               title={node.frontmatter.title}
               description={node.frontmatter.description}
               timeStamp={node.frontmatter.date}
+              translate={ t }
             />
           ))}
         </div>
@@ -38,8 +43,9 @@ export const query = graphql`
           frontmatter {
             title
             slug
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "YYYY-MM-DD")
             author
+            authorUrl
             description
           }
         }
@@ -53,4 +59,4 @@ export const query = graphql`
   }
 `
 
-export default Blog
+export default Translate(Blog)

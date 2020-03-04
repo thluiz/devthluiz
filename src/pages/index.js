@@ -1,32 +1,37 @@
 import React from "react"
+import Helmet from "react-helmet"
+
 import { graphql } from "gatsby"
+import Link from "gatsby-plugin-transition-link/AniLink"
 
 import Page from "../components/PageLayout"
 import Card from "../components/Card"
-import Link from "gatsby-plugin-transition-link/AniLink"
+import { Translate } from "../components/withI18n"
 import Intro from "../components/Intro"
-import Helmet from "react-helmet"
+import getDefaultLanguage from "../getDefaultLanguage"
 
 
-function index({ data, pageContext }) {
+function Index({ t, data, pageContext }) {
   return (
     <Page>
       <Helmet>
-        <title>Home | The 404 Blog</title>
+        <title>{t('pages.home.title')} | { t('site.title') }</title>
       </Helmet>
       <div className="container abs">
         <div className="row">
           <div className="col-lg-4">
-            <Intro />
+            <Intro translate={ t } language={ pageContext.language || getDefaultLanguage() } />
           </div>
           <div className="col-lg-8">
             {data.allMarkdownRemark.edges.map(({ node }) => (
               <Card
                 slug={node.frontmatter.slug}
                 authorName={node.frontmatter.author}
+                authorUrl={node.frontmatter.authorUrl}
                 title={node.frontmatter.title}
                 description={node.frontmatter.description}
                 timeStamp={node.frontmatter.date}
+                translate={ t }
               />
             ))}
             <Link
@@ -35,7 +40,7 @@ function index({ data, pageContext }) {
               to="blog"
               duration={0.5}
             >
-              View All →
+              { t('general.viewAll') } →
             </Link>
           </div>
         </div>
@@ -56,8 +61,9 @@ export const query = graphql`
           frontmatter {
             title
             slug
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "YYYY-MM-DD")
             author
+            authorUrl
             description
           }
         }
@@ -66,4 +72,4 @@ export const query = graphql`
   }
 `
 
-export default index
+export default Translate(Index)

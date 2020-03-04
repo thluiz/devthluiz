@@ -1,12 +1,13 @@
 ---
-slug: "/pt/blog/create-blog-lessthan-5mins"
-date: "2019-07-12"
-title: "Como criar um blog em menos de 5 min"
-author: "Mohan"
+slug: "/pt/blog/como-criar-um-blog-em-menos-de-5-minutos"
+date: "2020-03-01"
+title: "Como criar um blog em menos de 5 minutos"
+author: "ThLuiz"
+authorUrl: "/pt/sobre"
 tags: ["gatsby" , "blog"]
 language: "pt"
-description: "In this post, you will see how to create an awesome blog in less than 5 minutes"
-authorImg: "https://avatars3.githubusercontent.com/u/21126965?s=460&v=4"
+description: "Nessa publicação, veremos como criar um blog rapidamente"
+authorImg: "https://avatars2.githubusercontent.com/u/362263?s=460&v=4"
 ---
 
 Hello Folks,
@@ -14,6 +15,7 @@ Hello Folks,
 This is my first post and I'm really excited. I’m pretty sure I’ll write a lot more interesting things in the future. C'mon Let's build an awesome blog with GatsbyJS in less than 5 minutes.
 
 ## What is GatsbyJS?
+
 GatsbyJS is a static site generator, based on React that helps us build blazing fast sites with ease. If you're interested to learn more about it, refer [docs](https://www.gatsbyjs.org/docs/). 
 
 It's open-source and has a large community. Gatsby has tons of good looking, minimalistic, responsive starters that help us to get started with Gatsby. In this post, we will be using one of the starter to create our blog.

@@ -1,13 +1,4 @@
-const Config = {
-  title: 'Arquivos de Desenvolvimento',
-  short_name: 'Desenvolvimento',
-  description: 'Notas e fragmentos sobre desenvolvimento de softwares',
-  author: `@thluiz`,
-  githubUrl: 'https://github.com/thluiz/devthluiz',
-  theme_color: '#5C88C4',
-  secondary_color: '#FFC76B',
-  background_color: '#5C88C4'
-}
+const Config = require('./config');
 
 module.exports = {
   siteMetadata: {

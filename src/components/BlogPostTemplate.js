@@ -1,13 +1,18 @@
-import { graphql } from "gatsby"
+import config from "../../config"
 import React from 'react'
-import '../style.css'
 import Helmet from 'react-helmet'
+
+import { graphql } from "gatsby"
 import AniLink from "gatsby-plugin-transition-link/AniLink";
-import useTheme from '../useTheme'
-import TagList from "./TagList";
+
+import '../style.css'
 import { DiscussionEmbed } from 'disqus-react'
 
-const Temp = ({ data, pageContext }) => {
+import useTheme from '../useTheme'
+import TagList from "./TagList";
+import Translate from "./withI18n"
+
+const BlogTemplate = ({ t, data, pageContext }) => {
 
   const { theme, toggleTheme } = useTheme();
 
@@ -33,7 +38,7 @@ const Temp = ({ data, pageContext }) => {
   return (
     <div className={"row post " + theme}>
       <Helmet>
-        <title>{frontmatter.title}</title>
+        <title> {frontmatter.title} | { t( 'site.title') } </title>
       </Helmet>
       <button className="btn theme-toggle-button" onClick={toggleTheme}>
         {getTheme()}
@@ -41,7 +46,7 @@ const Temp = ({ data, pageContext }) => {
       <div className={"col-lg-4 px-5 post-prefix bg-" + theme}>
         <div className="flexbox">
           <AniLink
-            to="/"
+            to={`${frontmatter.language}/blog`}
             cover
             direction="right"
             bg="var(--primary-color)"
@@ -51,11 +56,11 @@ const Temp = ({ data, pageContext }) => {
                 &lt;
             </button>            
           </AniLink>
-          <span className="display-4 font-weight-bold primary-color">
+          <h1 className="display-4 font-weight-bold primary-color">
             {frontmatter.title}
-          </span>
+          </h1>
           <span className="font-weight-bold text-muted">
-            {timeToRead} MIN READ
+            {timeToRead} { t('general.minutesToRead') }
           </span>
           <div className="row">
             <img
@@ -66,7 +71,7 @@ const Temp = ({ data, pageContext }) => {
 
 
             <span className="col my-auto">
-              <AniLink fade className="font-weight-bold" to="/about">{frontmatter.author}</AniLink>
+              <AniLink fade className="font-weight-bold" to={ frontmatter.authorUrl }>{frontmatter.author}</AniLink>
               <h6>{frontmatter.date}</h6>
             </span>
           </div>
@@ -102,8 +107,9 @@ const Temp = ({ data, pageContext }) => {
             </li>
           </ul>
           <hr/>
-          {/* comments go here */}
-          <DiscussionEmbed {...disqusConfig} /> 
+          { config.useDisqus &&
+            <DiscussionEmbed {...disqusConfig} /> 
+          }
         </div>
       </div>
     </div>
@@ -111,19 +117,21 @@ const Temp = ({ data, pageContext }) => {
   )
 }
 
-export default Temp
+export default Translate(BlogTemplate)
 
 export const pageQuery = graphql`
   query($slug: String!) {
     markdownRemark(frontmatter: { slug: { eq: $slug } }) {
       html
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        date(formatString: "YYYY-MM-DD")
+        language
         slug
         title
         tags
         author
         authorImg
+        authorUrl
       }
       timeToRead
     }

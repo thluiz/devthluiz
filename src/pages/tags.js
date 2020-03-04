@@ -1,16 +1,19 @@
 import React from "react"
-import Page from "../components/PageLayout"
 import Helmet from "react-helmet"
-import Link from "gatsby-plugin-transition-link/AniLink"
-import { graphql } from "gatsby"
 
-const locales = require("../../locale/config")
-const languages = Object.keys(locales).map(function (key) { return locales[key]; });
-const default_language = languages.find(l => l.default).path;
+import { graphql } from "gatsby"
+import Link from "gatsby-plugin-transition-link/AniLink"
+
+import Page from "../components/PageLayout"
+import getDefaultLanguage from "../getDefaultLanguage"
+
+import Translate from "../components/withI18n"
 
 export const query = graphql`
   query TagsPostsList($language: String) {
-    allMarkdownRemark(filter: { frontmatter: { language: { eq: $language } } }) {
+    allMarkdownRemark(
+      filter: { frontmatter: { language: { eq: $language } } }
+    ) {
       edges {
         node {
           frontmatter {
@@ -28,7 +31,7 @@ export const query = graphql`
   }
 `
 
-const Tags = ({ data, pageContext }) => {
+const Tags = ({ t, data, pageContext }) => {
   const allMarkdownRemark = data.allMarkdownRemark
   const site = data.site
 
@@ -50,17 +53,22 @@ const Tags = ({ data, pageContext }) => {
   return (
     <Page>
       <Helmet>
-        <title>Tags | {siteMetadata.title}</title>
+        <title>
+          {t("pages.tags.title")} | {siteMetadata.title}
+        </title>
       </Helmet>
       <div className="container">
-        <h1 class="primary-color">Tags</h1>
+        <h1 class="primary-color">{t("pages.tags.title")}</h1>
         {Array.from(new Set(TagArray)).map((tagItem, index) => {
           return (
             <Link
               cover
               bg="var(--primary-color)"
               duration={0.5}
-              to={`/${pageContext.language || default_language}/tags/` + tagItem}
+              to={
+                `/${pageContext.language || getDefaultLanguage()}/tags/` +
+                tagItem
+              }
               className="btn mr-4 btn-info my-3"
             >
               #{tagItem}
@@ -72,4 +80,4 @@ const Tags = ({ data, pageContext }) => {
   )
 }
 
-export default Tags
+export default Translate(Tags)
