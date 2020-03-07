@@ -10,17 +10,21 @@ import { Translate } from "../components/withI18n"
 import Intro from "../components/Intro"
 import getDefaultLanguage from "../getDefaultLanguage"
 
-
 function Index({ t, data, pageContext }) {
   return (
     <Page>
       <Helmet>
-        <title>{t('pages.home.title')} | { t('site.title') }</title>
+        <title>
+          {t("pages.home.title")} | {t("site.title")}
+        </title>
       </Helmet>
       <div className="container abs">
         <div className="row">
           <div className="col-lg-4">
-            <Intro translate={ t } language={ pageContext.language || getDefaultLanguage() } />
+            <Intro
+              translate={t}
+              language={pageContext.language || getDefaultLanguage()}
+            />
           </div>
           <div className="col-lg-8">
             {data.allMarkdownRemark.edges.map(({ node }) => (
@@ -31,7 +35,7 @@ function Index({ t, data, pageContext }) {
                 title={node.frontmatter.title}
                 description={node.frontmatter.description}
                 timeStamp={node.frontmatter.date}
-                translate={ t }
+                translate={t}
               />
             ))}
             <Link
@@ -40,7 +44,7 @@ function Index({ t, data, pageContext }) {
               to="blog"
               duration={0.5}
             >
-              { t('general.viewAll') } →
+              {t("general.viewAll")} →
             </Link>
           </div>
         </div>
@@ -52,7 +56,9 @@ function Index({ t, data, pageContext }) {
 export const query = graphql`
   query index($language: String = "pt") {
     allMarkdownRemark(
-      filter: { frontmatter: { language: { eq: $language } } }
+      filter: {
+        frontmatter: { hide: { ne: true }, language: { eq: $language } }
+      }
       sort: { fields: frontmatter___date, order: DESC }
       limit: 4
     ) {

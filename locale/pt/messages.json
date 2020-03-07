@@ -7,7 +7,7 @@
   "site": {
     "title": "Arquivos do desenvolvedor",
     "description": "Notas e fragmentos sobre desenvolvimento*",
-    "description-tagline": "(Normalmente sobre desenvolvimento de Software, mas é possível desenvolver qualquer coisa)",
+    "description-tagline": "(Normalmente sobre desenvolvimento de Softwares, mas é possível desenvolver qualquer coisa)",
     "footer": {
       "signature": "Feito com GatsbyJs por "
     }

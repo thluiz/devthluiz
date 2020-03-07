@@ -1,7 +1,6 @@
-const config = require('./config');
+const config = require("./config")
 const path = require(`path`)
 const locales = require("./locale/config")
-
 
 /* 
   Author : Mohan
@@ -55,8 +54,9 @@ exports.createPages = ({ graphql, actions }) => {
   return graphql(
     `
       {
-        allMarkdownRemark (
-          sort: {fields: frontmatter___language}
+        allMarkdownRemark(
+          sort: { fields: frontmatter___language }
+          filter: { frontmatter: { hide: { ne: true } } }
         ) {
           edges {
             next {
@@ -71,6 +71,20 @@ exports.createPages = ({ graphql, actions }) => {
                 title
               }
             }
+            node {
+              frontmatter {
+                slug
+                tags
+                language
+              }
+            }
+          }
+        }
+        hidePosts: allMarkdownRemark(
+          sort: { fields: frontmatter___language }
+          filter: { frontmatter: { hide: { eq: true } } }
+        ) {
+          edges {
             node {
               frontmatter {
                 slug
@@ -101,7 +115,21 @@ exports.createPages = ({ graphql, actions }) => {
         context: {
           slug: post.node.frontmatter.slug,
           previous,
-          next
+          next,
+        },
+      })
+    })
+
+    // Create blog posts pages that are internal references
+    const hidePosts = result.data.hidePosts.edges
+
+    hidePosts.forEach((post, index) => {
+      createPage({
+        path: post.node.frontmatter.slug,
+        title: post.node.frontmatter.title,
+        component: blogPost,
+        context: {
+          slug: post.node.frontmatter.slug,
         },
       })
     })
@@ -115,7 +143,7 @@ exports.createPages = ({ graphql, actions }) => {
       )
 
       tagsGroup.forEach((_, tags) => {
-        tags.forEach(tag => {          
+        tags.forEach(tag => {
           createPage({
             path: `/${language}/tags/` + tag,
             component: tagComponent,

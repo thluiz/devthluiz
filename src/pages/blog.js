@@ -9,7 +9,7 @@ const Blog = ({ t, data }) => {
   return (
     <Page>
       <Helmet>
-        <title>          
+        <title>
           {t("pages.blog.title")} | {t("site.title")}
         </title>
       </Helmet>
@@ -23,7 +23,7 @@ const Blog = ({ t, data }) => {
               title={node.frontmatter.title}
               description={node.frontmatter.description}
               timeStamp={node.frontmatter.date}
-              translate={ t }
+              translate={t}
             />
           ))}
         </div>
@@ -35,7 +35,9 @@ const Blog = ({ t, data }) => {
 export const query = graphql`
   query BlogPostsList($language: String = "pt") {
     allMarkdownRemark(
-      filter: { frontmatter: { language: { eq: $language } } }
+      filter: {
+        frontmatter: { hide: { ne: true }, language: { eq: $language } }
+      }
       sort: { fields: frontmatter___date, order: DESC }
     ) {
       edges {
