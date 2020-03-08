@@ -2,12 +2,13 @@
   "general": {
     "viewAll": "Ver Todas",
     "minutesToRead": "Minutos",
-    "knowMore": "Saiba Mais"
+    "knowMore": "Saiba Mais",
+    "builtWith": "Feito com"
   }, 
   "site": {
     "title": "Arquivos do desenvolvedor",
-    "description": "Notas e fragmentos sobre desenvolvimento*",
-    "description-tagline": "(Normalmente sobre desenvolvimento de Softwares, mas é possível desenvolver qualquer coisa)",
+    "description": "Notas e fragmentos sobre desenvolvimento",
+    "description-tagline": "(Normalmente sobre Desenvolvimento de Softwares, mas é possível desenvolver qualquer coisa)",
     "footer": {
       "signature": "Feito com GatsbyJs por "
     }

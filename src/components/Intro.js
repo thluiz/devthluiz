@@ -5,6 +5,8 @@ import React from "react"
 import { Link } from "gatsby"
 import { StaticQuery, graphql } from "gatsby"
 
+import mdxLogo from '../images/mdx.svg'
+
 const Intro = ({ translate, data, language }) => (
   <intro>
     <div className="container my-4">
@@ -18,7 +20,7 @@ const Intro = ({ translate, data, language }) => (
       </Link>
 
       <hr />
-      <h4>Built with</h4>
+      <h4>{translate("general.builtWith")}</h4>
       <a href="https://reactjs.org/">
         <img
           className="mr-4 mt-3"
@@ -34,18 +36,11 @@ const Intro = ({ translate, data, language }) => (
           alt="build-with-icon-2"
         />
       </a>
-      <a href="https://www.netlify.com/">
+      <a href="https://mdxjs.com">
         <img
           className="mr-4 mt-3"
-          width="40px"
-          src="https://www.netlify.com/img/press/logos/logomark.png"
-          alt="build-with-icon-3"
-        />
-      </a>
-      <a href="https://www.markdownguide.org/">
-        <img
-          className="mr-4 mt-3"
-          src="https://img.icons8.com/office/40/000000/markdown.png"
+          src={mdxLogo} 
+          width="80px"
           alt="build-with-icon-4"
         />
       </a>

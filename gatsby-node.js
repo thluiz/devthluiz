@@ -2,6 +2,9 @@ const config = require("./config")
 const path = require(`path`)
 const locales = require("./locale/config")
 
+const languages = Object.keys(locales).map(function (key) { return locales[key]; });
+const default_language = languages.find(l => l.default).path;
+
 /* 
   Author : Mohan
   CreatedAt : 06-07-2019
@@ -120,10 +123,12 @@ exports.createPages = ({ graphql, actions }) => {
       })
     })
 
-    // Create blog posts pages that are internal references
-    const hidePosts = result.data.hidePosts.edges
+    // Create blog posts that are internal references
+    const internalPosts = result.data.hidePosts.edges
+    
+    internalPosts.forEach((post, index) => {
+      console.log(post);
 
-    hidePosts.forEach((post, index) => {
       createPage({
         path: post.node.frontmatter.slug,
         title: post.node.frontmatter.title,
@@ -145,7 +150,7 @@ exports.createPages = ({ graphql, actions }) => {
       tagsGroup.forEach((_, tags) => {
         tags.forEach(tag => {
           createPage({
-            path: `/${language}/tags/` + tag,
+            path: `/${ language }/tags/` + tag,
             component: tagComponent,
             context: {
               language,

@@ -11,6 +11,7 @@ module.exports = {
     secondary_color: Config.secondary_color,     
   },
   plugins: [
+    `gatsby-plugin-mdx`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-disqus`,

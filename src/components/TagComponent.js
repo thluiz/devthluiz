@@ -9,7 +9,7 @@ import { Translate } from "./withI18n"
 
 const TagComponent = ({ pageContext, data, i18n }) => {
   const tag = pageContext.tag
-  const language = pageContext.lng
+  const language = pageContext.language
 
   return (
     <div className="container">

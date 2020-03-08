@@ -2,12 +2,13 @@
   "general": {
     "viewAll": "View All",
     "minutesToRead": "Min",
-    "knowMore": "Know More"
+    "knowMore": "Know More",
+    "builtWith": "Built with"
   },
   "site": {
     "title": "Developer's files",
-    "description": "Notes and snippets about development*",
-    "description-tagline": "(normally about software development, but you can develop anything)",
+    "description": "Notes and snippets about development",
+    "description-tagline": "(normally about Software Development, but you can develop anything)",
     "footer": {
       "signature": "Built with GatsbyJs by "
     }
